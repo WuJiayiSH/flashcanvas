@@ -109,14 +109,14 @@ package
 
             // custom context menu
             var contextMenu:ContextMenu   = new ContextMenu();
-            var saveItem:ContextMenuItem  = new ContextMenuItem("Save Image As...");
-            var aboutItem:ContextMenuItem = new ContextMenuItem("About FlashCanvas");
+            // var saveItem:ContextMenuItem  = new ContextMenuItem("Save Image As...");
+            // var aboutItem:ContextMenuItem = new ContextMenuItem("About FlashCanvas");
 
-            saveItem.addEventListener(ContextMenuEvent.MENU_ITEM_SELECT, saveItemSelectHandler);
-            aboutItem.addEventListener(ContextMenuEvent.MENU_ITEM_SELECT, aboutItemSelectHandler);
+            // saveItem.addEventListener(ContextMenuEvent.MENU_ITEM_SELECT, saveItemSelectHandler);
+            // aboutItem.addEventListener(ContextMenuEvent.MENU_ITEM_SELECT, aboutItemSelectHandler);
 
             contextMenu.hideBuiltInItems();
-            contextMenu.customItems.push(saveItem, aboutItem);
+            // contextMenu.customItems.push(saveItem, aboutItem);
             this.contextMenu = contextMenu;
 
             try
@@ -182,16 +182,16 @@ package
             ExternalInterface.call("FlashCanvas.trigger", canvasId, type);
         }
 
-        private function saveItemSelectHandler(event:Event):void
-        {
-            saveImage();
-        }
+        // private function saveItemSelectHandler(event:Event):void
+        // {
+        //     saveImage();
+        // }
 
-        private function aboutItemSelectHandler(event:Event):void
-        {
-            var url:String         = "http://code.google.com/p/flashcanvas/";
-            var request:URLRequest = new URLRequest(url);
-            navigateToURL(request, "_blank");
-        }
+        // private function aboutItemSelectHandler(event:Event):void
+        // {
+        //     var url:String         = "http://code.google.com/p/flashcanvas/";
+        //     var request:URLRequest = new URLRequest(url);
+        //     navigateToURL(request, "_blank");
+        // }
     }
 }
