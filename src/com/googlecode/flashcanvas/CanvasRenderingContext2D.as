@@ -1256,6 +1256,9 @@ package com.googlecode.flashcanvas
             var dw:Number;
             var dh:Number;
 
+            var clip:Boolean = false; 
+            var source:BitmapData;
+
             if (args.length == 8)
             {
                 // Define the source and destination rectangles
@@ -1277,6 +1280,14 @@ package com.googlecode.flashcanvas
                 {
                     sy += sh;
                     sh = -sh;
+                }
+
+                // Clip the region within the source rectangle
+                if(sx != 0 ||
+                    sy != 0 ||
+                    sw != bitmapData.width ||
+                    sh != bitmapData.height){
+                    clip = true;
                 }
             }
             else
@@ -1304,10 +1315,17 @@ package com.googlecode.flashcanvas
             }
 
             // Clip the region within the source rectangle
-            var source:BitmapData    = new BitmapData(sw, sh, true, 0);
-            var sourceRect:Rectangle = new Rectangle(sx, sy, sw, sh);
-            var destPoint:Point      = new Point();
-            source.copyPixels(bitmapData, sourceRect, destPoint);
+            if(clip)
+            {
+                source = new BitmapData(sw, sh, true, 0);
+                var sourceRect:Rectangle = new Rectangle(sx, sy, sw, sh);
+                var destPoint:Point      = new Point();
+                source.copyPixels(bitmapData, sourceRect, destPoint);
+            }else
+            {
+                source = bitmapData;
+            }
+            
 
             // Create transformation matrix
             var matrix:Matrix = new Matrix();
@@ -1333,7 +1351,7 @@ package com.googlecode.flashcanvas
             _canvas.bitmapData.draw(source, matrix, colorTransform, null, null, true);
 
             // Release the memory
-            source.dispose();
+            if(clip) source.dispose();
         }
     }
 }
